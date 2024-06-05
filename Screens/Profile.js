@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert, ImageBackground } from 'react-native';
 
-const ProfilePage = () => {
+export default function ProfilePage({ navigation }) {
   const [name, setName] = useState('John Doe');
   const [username, setUsername] = useState('@johndoe');
   const [email, setEmail] = useState('johndoe@example.com');
@@ -27,10 +27,10 @@ const ProfilePage = () => {
     <ImageBackground source={{ uri: 'https://via.placeholder.com/600x800' }} style={styles.background}>
       <View style={styles.overlay}>
         <View style={styles.container}>
-        <Image
-  style={styles.profileImage}
-  source={require('../assets/item1.jpg')} // Assuming the image is located in the assets folder
-/>
+          <Image
+            style={styles.profileImage}
+            source={require('../assets/RevU.png')} // Assuming the image is located in the assets folder
+          />
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Name:</Text>
             <TextInput
@@ -195,5 +195,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-export default ProfilePage;

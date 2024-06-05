@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 
-const HomeProfile = () => {
+export default function HomeProfile({ navigation }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const categories = [
@@ -146,5 +146,3 @@ const styles = StyleSheet.create({
     color: '#666',
   },
 });
-
-export default HomeProfile;
