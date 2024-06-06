@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { View, FlatList, StyleSheet, ScrollView, Text } from 'react-native';
+import { View, FlatList, StyleSheet, ScrollView, Text, TouchableOpacity } from 'react-native';
 import { Card, Button, SearchBar } from 'react-native-elements';
+import { BottomSheet } from '@rneui/themed';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+
 const bestSellerItems = [
     {
         id: '1',
         name: 'Best Seller 1',
         price: '$10',
         image: 'https://via.placeholder.com/150',
+        model: 'mmm',
     },
     {
         id: '2',
@@ -121,17 +125,22 @@ const recommendedItems = [
 ];
 
 export default function Home({ navigation }) {
-    initialSearch = '',
-        initialBestSellerItems = bestSellerItems,
-        initialMostReviewedItems = mostReviewedItems,
-        initialRecommendedItems = recommendedItems
+    const initialSearch = '';
+    const initialBestSellerItems = bestSellerItems;
+    const initialMostReviewedItems = mostReviewedItems;
+    const initialRecommendedItems = recommendedItems;
+
     const [search, setSearch] = useState(initialSearch);
     const [filteredBestSeller, setFilteredBestSeller] = useState(initialBestSellerItems || []);
     const [filteredMostReviewed, setFilteredMostReviewed] = useState(initialMostReviewedItems || []);
     const [filteredRecommended, setFilteredRecommended] = useState(initialRecommendedItems || []);
-    const press = () => {
-        navigation.navigate('Login')
-    }
+    const [isVisible, setIsVisible] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
+
+    const press = (item) => {
+        setSelectedItem(item);
+        setIsVisible(true);
+    };
 
     const updateSearch = (search) => {
         setSearch(search);
@@ -145,14 +154,32 @@ export default function Home({ navigation }) {
             <Card.Title style={styles.cardTitle}>{item.name}</Card.Title>
             <Card.Image source={{ uri: item.image }} style={styles.image} />
             <Text style={styles.price}>{item.price}</Text>
+            <Card.Title style={styles.cardTitle}>{item.model}</Card.Title>
             <Button
                 title="Buy Now"
                 buttonStyle={styles.buyButton}
                 titleStyle={styles.buyButtonTitle}
-                onPress={press}
+                onPress={() => press(item)}
             />
         </Card>
     );
+
+    const customContent = () => (
+        selectedItem ? (
+            <View style={styles.contentContainer}>
+                <Text style={styles.contentTitle}>name : {selectedItem.name}</Text>
+                <Text style={styles.contentPrice}>price :{selectedItem.price}</Text>
+                <View style={styles.listContainer}>
+
+                </View>
+
+                <TouchableOpacity onPress={() => setIsVisible(false)}>
+                    <Text style={styles.closeButton}>close</Text>
+                </TouchableOpacity>
+            </View>
+        ) : null
+    );
+
 
     return (
         <ScrollView style={styles.container}>
@@ -190,6 +217,13 @@ export default function Home({ navigation }) {
                     showsHorizontalScrollIndicator={false}
                 />
             </View>
+            <SafeAreaProvider>
+                <SafeAreaView style={styles.container}>
+                    <BottomSheet modalProps={{}} isVisible={isVisible}>
+                        {customContent()}
+                    </BottomSheet>
+                </SafeAreaView>
+            </SafeAreaProvider>
         </ScrollView>
     );
 };
@@ -197,8 +231,9 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#0000', // White background color
-        padding: 1,
+        backgroundColor: '#0000',
+        top: 25,
+        marginBottom: 40,
     },
     card: {
         width: 220,
@@ -218,6 +253,7 @@ const styles = StyleSheet.create({
         height: 150,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
+        bottom: 10,
     },
     price: {
         marginVertical: 10,
@@ -238,12 +274,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         color: '#333',
     },
-    searchContainer: {
-        backgroundColor: 'transparent',
-        borderBottomWidth: 0,
-        borderTopWidth: 0,
-        marginBottom: 20,
-    },
+    searchContainer: {},
     searchInputContainer: {
         backgroundColor: '#EFEFEF',
         borderRadius: 10,
@@ -251,6 +282,24 @@ const styles = StyleSheet.create({
     searchInput: {
         color: '#333',
     },
+    contentContainer: {
+        padding: 20,
+        backgroundColor: 'white',
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        height: 380,
+    },
+    contentTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 20,
+    },
+    contentPrice: {
+        fontSize: 16,
+        color: '#6200EE',
+        marginBottom: 20,
+    },
+    closeButton: {
+        backgroundColor: 'blue',
+    },
 });
-
-// export default ProductsScreen;
