@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-
+import { AntDesign, FontAwesome5, Ionicons, MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
 export default function HomeProfile({ navigation }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const button = () => {
+    navigation.navigate('ProfilePage');
+  }
 
   const categories = [
     {
+
       name: 'History',
       count: 3,
       items: [
@@ -22,7 +26,10 @@ export default function HomeProfile({ navigation }) {
         { name: 'Recommendation Item 2', reviews: 80 },
         { name: 'Recommendation Item 3', reviews: 60 },
         { name: 'Recommendation Item 4', reviews: 40 },
-        { name: 'Recommendation Item 5', reviews: 20 }
+        { name: 'Recommendation Item 5', reviews: 20 },
+        { name: 'Recommendation Item 6', reviews: 20 },
+        { name: 'Recommendation Item 7', reviews: 20 },
+        { name: 'Recommendation Item 8', reviews: 20 }
       ]
     },
     {
@@ -41,9 +48,20 @@ export default function HomeProfile({ navigation }) {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+
       <View style={styles.profileHeader}>
+        <View>
+          <TouchableOpacity onPress={button}>
+            <Ionicons
+              name='settings'
+              size={25}
+              left={150}
+              top={30}
+            />
+          </TouchableOpacity>
+        </View>
         <Image
-          source={{ uri: 'https://via.placeholder.com/150' }} // Placeholder image URL
+          source={{ uri: 'https://via.placeholder.com/150' }}
           style={styles.profileImage}
         />
         <Text style={styles.profileName}>Paula</Text>
@@ -86,6 +104,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: '#fff',
     paddingVertical: 20,
+    paddingBottom: 60
   },
   profileHeader: {
     alignItems: 'center',

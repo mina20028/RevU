@@ -14,6 +14,10 @@ export default function Login({ navigation }) {
     const button = () => {
         navigation.navigate('SignUp');
     }
+
+    const homebutton = () => {
+        navigation.navigate('Tapbar');
+    }
     return (
         <View style={styles.container}>
             <Image source={backgroung} style={{ position: 'absolute', width: width, height: height, bottom: 80 }} />
@@ -45,7 +49,7 @@ export default function Login({ navigation }) {
                 />
 
             </View>
-            <TouchableOpacity style={{
+            <TouchableOpacity onPress={homebutton} style={{
                 backgroundColor: '#39A7FF',
                 width: 340,
                 borderWidth: 2,

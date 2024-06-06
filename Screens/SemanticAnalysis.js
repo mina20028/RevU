@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert, Dimensions } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Dimensions } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { AntDesign, FontAwesome5, Ionicons, MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
@@ -56,11 +56,11 @@ export default function SemanticAnalysis({ navigation }) {
             <View>
 
 
-                <TouchableOpacity onPress={back}>
+                {/* <TouchableOpacity onPress={back}>
                     <View style={styles.design} >
                         <Ionicons name='arrow-back-outline' top={2} size={25} color={'#3ABEF9'} />
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <View style={{ alignItems: 'center' }}>
                     <Text style={{ top: 200, fontSize: 40, fontFamily: 'Bego', color: 'white' }}>Welcome</Text>
                 </View>
@@ -108,6 +108,7 @@ export default function SemanticAnalysis({ navigation }) {
                 </View>
 
                 <LineChart
+
                     data={{
                         labels: ['X'],
                         datasets: [
@@ -120,10 +121,9 @@ export default function SemanticAnalysis({ navigation }) {
                             },
                         ],
                     }}
-                    width={Dimensions.get('window').width - 30} // from react-native
+                    width={Dimensions.get('window').width - 30}
                     height={220}
-                    // yAxisLabel="$"
-                    // yAxisSuffix="k"
+
                     yAxisInterval={1}
                     chartConfig={{
                         backgroundGradientFrom: '#F3F7EC',
@@ -144,7 +144,7 @@ export default function SemanticAnalysis({ navigation }) {
                     style={{
                         marginVertical: 230,
                         borderRadius: 16,
-                        right: 0
+                        alignItems: 'center'
                     }}
                 />
 
@@ -157,9 +157,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         //backgroundColor: 'blue',
-
-
-
     },
     design: {
         alignContent: 'center',

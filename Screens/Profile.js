@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert, ImageBackground } from 'react-native';
-
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, ImageBackground, Alert, ScrollView } from 'react-native';
+import { AntDesign, FontAwesome5, Ionicons, MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
 export default function ProfilePage({ navigation }) {
+  const button = () => {
+    navigation.goBack();
+  }
   const [name, setName] = useState('John Doe');
   const [username, setUsername] = useState('@johndoe');
   const [email, setEmail] = useState('johndoe@example.com');
@@ -24,99 +27,118 @@ export default function ProfilePage({ navigation }) {
   };
 
   return (
-    <ImageBackground source={{ uri: 'https://via.placeholder.com/600x800' }} style={styles.background}>
-      <View style={styles.overlay}>
-        <View style={styles.container}>
-          <Image
-            style={styles.profileImage}
-            source={require('../assets/RevU.png')} // Assuming the image is located in the assets folder
-          />
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Name:</Text>
-            <TextInput
-              style={[styles.input, !isEditing && styles.inputDisabled]}
-              value={name}
-              onChangeText={setName}
-              placeholder="Name"
-              placeholderTextColor="#999"
-              editable={isEditing}
+    <ScrollView style={styles.view}>
+
+      <View style={styles.background}>
+        <View style={styles.overlay}>
+          <View style={styles.container}>
+            <View>
+              <TouchableOpacity onPress={button}>
+                <Ionicons
+                  name='arrow-back'
+                  size={30}
+                  right={150}
+                  top={30}
+                />
+              </TouchableOpacity>
+
+            </View>
+            <Image
+              style={styles.profileImage}
+              source={require('../assets/RevU.png')} // Assuming the image is located in the assets folder
             />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Username:</Text>
-            <TextInput
-              style={[styles.input, !isEditing && styles.inputDisabled]}
-              value={username}
-              onChangeText={setUsername}
-              placeholder="Username"
-              placeholderTextColor="#999"
-              editable={isEditing}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Email:</Text>
-            <TextInput
-              style={[styles.input, !isEditing && styles.inputDisabled]}
-              value={email}
-              onChangeText={setEmail}
-              placeholder="Email"
-              placeholderTextColor="#999"
-              keyboardType="email-address"
-              editable={isEditing}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Password:</Text>
-            <View style={styles.passwordInputContainer}>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Name:</Text>
               <TextInput
-                style={[styles.input, !isEditing && styles.inputDisabled, styles.passwordInput]}
-                value={password}
-                onChangeText={setPassword}
-                placeholder="Password"
+                style={[styles.input, !isEditing && styles.inputDisabled]}
+                value={name}
+                onChangeText={setName}
+                placeholder="Name"
                 placeholderTextColor="#999"
-                secureTextEntry={!showPassword}
                 editable={isEditing}
               />
-              {isEditing && (
-                <TouchableOpacity
-                  style={styles.showPasswordButton}
-                  onPress={toggleShowPassword}
-                >
-                  <Text style={styles.showPasswordButtonText}>{showPassword ? 'Hide' : 'Show'}</Text>
-                </TouchableOpacity>
-              )}
             </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Username:</Text>
+              <TextInput
+                style={[styles.input, !isEditing && styles.inputDisabled]}
+                value={username}
+                onChangeText={setUsername}
+                placeholder="Username"
+                placeholderTextColor="#999"
+                editable={isEditing}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Email:</Text>
+              <TextInput
+                style={[styles.input, !isEditing && styles.inputDisabled]}
+                value={email}
+                onChangeText={setEmail}
+                placeholder="Email"
+                placeholderTextColor="#999"
+                keyboardType="email-address"
+                editable={isEditing}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Password:</Text>
+              <View style={styles.passwordInputContainer}>
+                <TextInput
+                  style={[styles.input, !isEditing && styles.inputDisabled, styles.passwordInput]}
+                  value={password}
+                  onChangeText={setPassword}
+                  placeholder="Password"
+                  placeholderTextColor="#999"
+                  secureTextEntry={!showPassword}
+                  editable={isEditing}
+                />
+                {isEditing && (
+                  <TouchableOpacity
+                    style={styles.showPasswordButton}
+                    onPress={toggleShowPassword}
+                  >
+                    <Text style={styles.showPasswordButtonText}>{showPassword ? 'Hide' : 'Show'}</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Bio:</Text>
+              <TextInput
+                style={[styles.input, styles.textArea, !isEditing && styles.inputDisabled]}
+                value={bio}
+                onChangeText={setBio}
+                placeholder="Bio"
+                placeholderTextColor="#999"
+                multiline
+                editable={isEditing}
+              />
+            </View>
+            <TouchableOpacity style={styles.editProfileButton} onPress={toggleEditing}>
+              <Text style={styles.editProfileButtonText}>{isEditing ? 'Save Profile' : 'Edit Profile'}</Text>
+            </TouchableOpacity>
           </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Bio:</Text>
-            <TextInput
-              style={[styles.input, styles.textArea, !isEditing && styles.inputDisabled]}
-              value={bio}
-              onChangeText={setBio}
-              placeholder="Bio"
-              placeholderTextColor="#999"
-              multiline
-              editable={isEditing}
-            />
-          </View>
-          <TouchableOpacity style={styles.editProfileButton} onPress={toggleEditing}>
-            <Text style={styles.editProfileButtonText}>{isEditing ? 'Save Profile' : 'Edit Profile'}</Text>
-          </TouchableOpacity>
         </View>
       </View>
-    </ImageBackground>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  view: {
+
+    paddingBottom: 60
+  },
   background: {
-    flex: 1,
-    resizeMode: 'cover',
     justifyContent: 'center',
+    backgroundColor: 'white',
+    paddingBottom: 70,
+    paddingTop: 20
   },
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)', // Semi-transparent background
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     justifyContent: 'center',
   },
   container: {
