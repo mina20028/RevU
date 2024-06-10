@@ -155,7 +155,7 @@ const recommendedItems = [
     },
     {
         id: '3',
-        name: 'Recommendation #2',
+        name: 'Recommendation #3',
         price: '$27.99',
         image: require('../assets/product/watch.jpg'),
         Text: 'TOZO S2 44mm Smart Watch Alexa Built-in Fitness Tracker with Heart Rate and Blood Oxygen Monitor,Sleep Monitor 5ATM Waterproof HD Touchscreen for Men Women Compatible with iPhone&Android Black'
