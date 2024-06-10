@@ -8,6 +8,7 @@ export default function ProfilePage({ navigation }) {
   const [name, setName] = useState('John Doe');
   const [username, setUsername] = useState('@johndoe');
   const [email, setEmail] = useState('johndoe@example.com');
+  const [wallet, setWallet] = useState('$1000');
   const [password, setPassword] = useState('password');
   const [showPassword, setShowPassword] = useState(false);
   const [bio, setBio] = useState(
@@ -103,6 +104,18 @@ export default function ProfilePage({ navigation }) {
                 )}
               </View>
             </View>
+
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Wallet:</Text>
+              <TextInput
+                style={styles.input}
+                value={wallet}
+                placeholderTextColor="#999"
+                editable={[isEditing, !isEditing]}
+
+              />
+            </View>
+
             <View style={styles.inputContainer}>
               <Text style={styles.label}>Bio:</Text>
               <TextInput
