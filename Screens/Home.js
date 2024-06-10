@@ -8,7 +8,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import m from '../assets/product/airpods.jpg';
 const bestSellerItems = [
     {
-        id: '1',
+        id: 'Best Seller #1',
         name: '#1',
         price: '$54.95',
         image: require('../assets/product/airpods.jpg'),
@@ -23,56 +23,56 @@ const bestSellerItems = [
     },
     {
         id: '3',
-        name: 'Best Seller 3',
+        name: 'Best Seller #3',
         price: '$29.99',
         image: require('../assets/product/FireTV.jpg'),
         Text: 'Amazon Fire TV Stick 4K streaming device, more than 1.5 million movies and TV episodes, supports Wi-Fi 6, watch free & live TV'
     },
     {
         id: '4',
-        name: 'Best Seller 4',
+        name: 'Best Seller #4',
         price: '$16.99',
         image: require('../assets/product/Surge Protector Power Strip.jpg'),
         Text: 'Surge Protector Power Strip - 8 Outlets with 4 USB (2 USB C) Charging Ports, Multi Plug Outlet Extender, 5Ft Braided Extension Cord, Flat Plug Wall Mount Desk USB Charging Station for Home Office ETL'
     },
     {
         id: '5',
-        name: 'Best Seller 5',
+        name: 'Best Seller #5',
         price: '$19.99',
         image: require('../assets/product/Tozo.jpg'),
         Text: 'TOZO A1 Mini Wireless Earbuds Bluetooth 5.3 in Ear Light-Weight Headphones Built-in Microphone, IPX5 Waterproof, Immersive Premium Sound Long Distance Connection Headset with Charging Case, Black'
     },
     {
         id: '6',
-        name: 'Best Seller 6',
+        name: 'Best Seller #6',
         price: '$22.49',
         image: require('../assets/product/Echo.jpg'),
         Text: 'Echo Dot (5th Gen, 2022 release) , With bigger vibrant sound, helpful routines and Alexa , Charcoal'
     },
     {
         id: '7',
-        name: 'Best Seller 6',
+        name: 'Best Seller #7',
         price: '$9.99',
         image: require('../assets/product/Digital Kitchen Scale.jpg'),
         Text: 'Ultrean Food Scale, Digital Kitchen Scale Weight Grams and Ounces for Baking Cooking and Meal Prep, 6 Units with Tare Function, 11lb (Batteries Included)'
     },
     {
         id: '8',
-        name: 'Best Seller 6',
+        name: 'Best Seller #8',
         price: '$$14.46',
         image: require('../assets/product/Charger.jpg'),
         Text: 'INIU Portable Charger, Slimmest 10000mAh 5V/3A Power Bank, USB C in&Out High-Speed Charging Battery Pack, External Phone Powerbank Compatible with iPhone 15 14 13 12 X Samsung S22 S21 Google iPad etc'
     },
     {
         id: '9',
-        name: 'Best Seller 6',
+        name: 'Best Seller #9',
         price: '$27.99',
         image: require('../assets/product/Wireless Charger.jpg'),
         Text: 'Wireless Charger iPhone Charging Station: 3 in 1 Charger Stand Multiple Devices for Apple - iPhone 15 14 Pro Max 13 12 11 - Watch 9 8 7 6 5 4 3 2 Se - Airpods 3 2 Pro'
     },
     {
         id: '10',
-        name: 'Best Seller 6',
+        name: 'Best Seller #10',
         price: '$11.95',
         image: require('../assets/product/story.jpg'),
         Text: 'Dad, I Want to Hear Your Story: A Father’s Guided Journal To Share His Life & His Love (Hear Your Story Books) Paperback - May 27, 2019'
@@ -82,56 +82,56 @@ const bestSellerItems = [
 const mostReviewedItems = [
     {
         id: '1',
-        name: 'Most Reviewed 1',
+        name: 'Most Reviewed #1',
         price: '$27.99',
         image: require('../assets/product/watch.jpg'),
         Text: 'TOZO S2 44mm Smart Watch Alexa Built-in Fitness Tracker with Heart Rate and Blood Oxygen Monitor,Sleep Monitor 5ATM Waterproof HD Touchscreen for Men Women Compatible with iPhone&Android Black'
     },
     {
         id: '2',
-        name: 'Most Reviewed 2',
+        name: 'Most Reviewed #2',
         price: '$199.00',
         image: require('../assets/product/meta.jpg'),
         Text: 'Meta Quest 2 — Advanced All-In-One Virtual Reality Headset — 128 GB , Color White , Included Component , Quick Start Guide , Power Adapter (US, UK, EU, AU), Glass Spacer , 2 AA Batteries , Safety & Warranty Guide , Charging cable , VR headset, 2 Touch Controllers (L&R)'
     },
     {
         id: '3',
-        name: 'Most Reviewed 3',
+        name: 'Most Reviewed #3',
         price: '$27.99',
         image: require('../assets/product/Bottle.jpg'),
         Text: 'Owala FreeSip Insulated Stainless Steel Water Bottle with Straw for Sports and Travel , BPA-Free , 24-oz , Blue/Teal (Denim)'
     },
     {
         id: '4',
-        name: 'Most Reviewed 4',
+        name: 'Most Reviewed #4',
         price: '$19.99',
         image: require('../assets/product/microphone.jpg'),
         Text: 'BONAOK Wireless Bluetooth Karaoke Microphone, 3-in-1 Portable Handheld Mic Speaker for All Smartphones,Gifts for Girls Kids Adults All Age Q37(Rose Gold)'
     },
     {
         id: '5',
-        name: 'Most Reviewed 5',
+        name: 'Most Reviewed #5',
         price: '$34.55',
         image: require('../assets/product/Nespresso.jpg'),
         Text: 'Nespresso Capsules Vertuo , Double Espresso Chiaro , Medium Roast Espresso Coffee , 30-Count Coffee Pods , Brews 2.7oz'
     },
     {
         id: '6',
-        name: 'Most Reviewed 6',
+        name: 'Most Reviewed #6',
         price: '$159.99',
         image: require('../assets/product/iphone12.jpg'),
         Text: 'Apple iPhone 12 , 64GB , 4GB Ram , Screen Size	6.1 Inches ,Black - Fully Unlocked (Renewed) , Operating System	iOS 16'
     },
     {
         id: '7',
-        name: 'Most Reviewed 6',
+        name: 'Most Reviewed #7',
         price: '$139.00',
         image: require('../assets/product/Drill.jpg'),
         Text: 'DEWALT 20V MAX Cordless Drill and Impact Driver, Power Tool Combo Kit with 2 Batteries and Charger (DCK240C2)'
     },
     {
         id: '8',
-        name: 'Most Reviewed 6',
+        name: 'Most Reviewed #8',
         price: '$79.99',
         image: require('../assets/product/ring.jpg'),
         Text: 'Ring Video Doorbell, Satin Nickel bundle with Ring Stick Up Cam Battery, White'
@@ -141,98 +141,98 @@ const mostReviewedItems = [
 const recommendedItems = [
     {
         id: '1',
-        name: 'Recommendation 1',
+        name: 'Recommendation #1',
         price: '$39.99',
         image: require('../assets/product/Amada.jpg'),
         Text: 'AMADA HOMEFURNISHING Projector Stand, Laptop Stand with Adjustable Height 22 to 36 inch, Projector Mount as DJ Racks/Projector Tripod Stand/Laptop Floor Stand for Office, Home, Stage or Studio-AMPS01'
     },
     {
         id: '2',
-        name: 'Best Seller 6',
+        name: 'Recommendation #2',
         price: '$$14.46',
         image: require('../assets/product/Charger.jpg'),
         Text: 'INIU Portable Charger, Slimmest 10000mAh 5V/3A Power Bank, USB C in&Out High-Speed Charging Battery Pack, External Phone Powerbank Compatible with iPhone 15 14 13 12 X Samsung S22 S21 Google iPad etc'
     },
     {
         id: '3',
-        name: 'Most Reviewed 1',
+        name: 'Recommendation #2',
         price: '$27.99',
         image: require('../assets/product/watch.jpg'),
         Text: 'TOZO S2 44mm Smart Watch Alexa Built-in Fitness Tracker with Heart Rate and Blood Oxygen Monitor,Sleep Monitor 5ATM Waterproof HD Touchscreen for Men Women Compatible with iPhone&Android Black'
     },
     {
         id: '4',
-        name: 'Recommendation 4',
+        name: 'Recommendation #4',
         price: '$29.99',
         image: require('../assets/product/keyboard.jpg'),
         Text: 'Wireless Keyboard and Mouse Combo - RGB Backlit, Rechargeable & Light Up Letters, Full-Size, Ergonomic Tilt Angle, Sleep Mode, 2.4GHz Quiet Keyboard Mouse for Mac, Windows, Laptop, PC, Trueque'
     },
     {
         id: '5',
-        name: 'Recommendation 5',
+        name: 'Recommendation #5',
         price: '$968.00',
         image: require('../assets/product/Macbbok.jpg'),
         Text: 'Apple 2022 MacBook Air Laptop with M2 chip: 13.6-inch Liquid Retina Display, 8GB RAM, 256GB SSD Storage; Starlight with AppleCare+ (3 Years)'
     },
     {
         id: '6',
-        name: 'Recommendation 6',
+        name: 'Recommendation #6',
         price: '$21.99',
         image: require('../assets/product/amazonTv.jpg'),
         Text: 'Amazon Fire TV Stick, HD, sharp picture quality, fast streaming, free & live TV, Alexa Voice Remote with TV controls'
     },
     {
         id: '7',
-        name: 'Recommendation 6',
+        name: 'Recommendation #7',
         price: '$99.88',
         image: require('../assets/product/COSORI Air.jpg'),
         Text: 'COSORI Air Fryer 6 Qt, 9-in-1 Functions, 5 Fan Speeds, Nutrition Facts for 100+ In-App Recipes, Faster Roast, Bake, Dehydrate, Reheat, Broil, Proof, 95% Less Oil, Dishwasher Safe, TurboBlaze, Gray'
     },
     {
         id: '8',
-        name: 'Recommendation 6',
+        name: 'Recommendation #8',
         price: '$59.99',
         image: require('../assets/product/K-mini.jpg'),
         Text: 'Keurig K-Mini Single Serve Coffee Maker , Coffee Maker Type	Espresso Machine , Special Feature	Manual , Black'
     },
     {
         id: '9',
-        name: 'Recommendation 6',
+        name: 'Recommendation #9',
         price: '$39.99',
         image: require('../assets/product/TVwall.jpg'),
         Text: 'Mounting Dream TV Wall Mount for 32-65 Inch TV, TV Mount with Swivel and Tilt, Full Motion TV Bracket with Articulating Dual Arms, Fits 16inch Studs, Max VESA 400X400 mm, 99lbs, MD2380'
     },
     {
         id: '10',
-        name: 'Recommendation 6',
+        name: 'Recommendation #10',
         price: '159.95',
         image: require('../assets/product/Beats fitpro.jpg'),
         Text: 'Beats Fit Pro - True Wireless Noise Cancelling Earbuds - Apple H1 Headphone Chip, Compatible with Apple & Android, Class 1 Bluetooth, Built-in Microphone, 6 Hours of Listening Time - Beats Black'
     },
     {
         id: '11',
-        name: 'Recommendation 6',
+        name: 'Recommendation #11',
         price: '$429.99',
         image: require('../assets/product/Tv.jpg'),
         Text: 'Amazon Fire TV 55" Omni QLED Series 4K UHD smart TV, Dolby Vision IQ, Fire TV Ambient Experience, local dimming, hands-free with Alexa'
     },
     {
         id: '12',
-        name: 'Recommendation 6',
+        name: 'Recommendation #12',
         price: '$299.99',
         image: require('../assets/product/Gopro.jpg'),
         Text: 'GoPro HERO12 Black - Waterproof Action Camera with 5.3K60 Ultra HD Video, 27MP Photos, HDR, 1/1.9" Image Sensor, Live Streaming, Webcam, Stabilization'
     },
     {
         id: '13',
-        name: 'Recommendation 6',
+        name: 'Recommendation #13',
         price: '$29.97',
         image: require('../assets/product/Portable Bluetooth Speaker.jpg'),
         Text: 'Portable Bluetooth Speaker, IPX7 Waterproof Wireless Speaker with Colorful Flashing Lights, 25W Super Bass 24H Playtime, 100ft Range, TWS Pairing for Outdoor, Home, Party, Beach, Travel'
     },
     {
         id: '14',
-        name: 'Recommendation 6',
+        name: 'Recommendation #14',
         price: '$19.99',
         image: require('../assets/product/USB C Fast Charger.jpg'),
         Text: 'USB C Fast Charger 100W GaN 6 Port Type USB C Charging Station Hub Block USB C Wall Charger Power Strip Adapter Plug Cube Brick 3 USB C 3 USB A for iPad iPhone 15 14 13 12 11 Pro Max Pixel Note Galaxy'
