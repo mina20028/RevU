@@ -267,10 +267,12 @@ export default function Home({ navigation }) {
     const renderProduct = ({ item }) => (
         <Card containerStyle={styles.card}>
             <Card.Title style={styles.cardTitle}>{item.name}</Card.Title>
-            <Image source={item.image}
-                style={{ resizeMode: 'contain', width: 190, height: 190 }}
+            <TouchableOpacity onPress={() => press(item)}>
+                <Image source={item.image}
+                    style={{ resizeMode: 'contain', width: 190, height: 190 }}
 
-            />
+                />
+            </TouchableOpacity>
             <Text style={styles.price}>{item.price}</Text>
             <Card.Title numberOfLines={1}>{item.Text}</Card.Title>
             <Button
