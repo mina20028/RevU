@@ -11,35 +11,33 @@ export default function HomeProfile({ navigation }) {
     {
 
       name: 'History',
-      count: 3,
       items: [
         { name: 'History Item 1', reviews: 20 },
         { name: 'History Item 2', reviews: 15 },
         { name: 'History Item 3', reviews: 12 }
       ]
     },
-    {
-      name: 'Recommendation',
-      count: 5,
-      items: [
-        { name: 'Recommendation Item 1', reviews: 100 },
-        { name: 'Recommendation Item 2', reviews: 80 },
-        { name: 'Recommendation Item 3', reviews: 60 },
-        { name: 'Recommendation Item 4', reviews: 40 },
-        { name: 'Recommendation Item 5', reviews: 20 },
-        { name: 'Recommendation Item 6', reviews: 20 },
-        { name: 'Recommendation Item 7', reviews: 20 },
-        { name: 'Recommendation Item 8', reviews: 20 }
-      ]
-    },
-    {
-      name: 'Likes',
-      count: 2,
-      items: [
-        { name: 'Likes Item 1', reviews: 10 },
-        { name: 'Likes Item 2', reviews: 8 }
-      ]
-    }
+    // {
+    //   name: 'Recommendation',
+    //   count: 5,
+    //   items: [
+    //     { name: 'Recommendation Item 1', reviews: 100 },
+    //     { name: 'Recommendation Item 2', reviews: 80 },
+    //     { name: 'Recommendation Item 3', reviews: 60 },
+    //     { name: 'Recommendation Item 4', reviews: 40 },
+    //     { name: 'Recommendation Item 5', reviews: 20 },
+    //     { name: 'Recommendation Item 6', reviews: 20 },
+    //     { name: 'Recommendation Item 7', reviews: 20 },
+    //     { name: 'Recommendation Item 8', reviews: 20 }
+    //   ]
+    // },
+    // {
+    //   name: 'Likes',
+    //   count: 2,
+    //   items: [
+    //     { name: 'Likes Item 1', reviews: 10 },
+    //     { name: 'Likes Item 2', reviews: 8 }
+    //   ]   }
   ];
 
   const handleCategoryPress = (category) => {
@@ -86,7 +84,6 @@ export default function HomeProfile({ navigation }) {
 
 const CategoryButton = ({ onPress, count, label }) => (
   <TouchableOpacity onPress={onPress} style={styles.categoryItem}>
-    <Text style={styles.statCount}>{count}</Text>
     <Text style={styles.statLabel}>{label}</Text>
   </TouchableOpacity>
 );
@@ -104,51 +101,68 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: '#fff',
     paddingVertical: 20,
-    paddingBottom: 60
+    paddingBottom: 60,
+    alignItems: 'center',
+
   },
   profileHeader: {
     alignItems: 'center',
     marginBottom: 20,
+
   },
   profileImage: {
     width: 150,
     height: 150,
     borderRadius: 75,
     marginBottom: 10,
+
   },
   profileName: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 5,
+
   },
   profileLocation: {
     fontSize: 16,
     color: '#666',
   },
   categories: {
-    flexGrow: 0,
+
     marginBottom: 10,
   },
   categoryItem: {
-    alignItems: 'center',
-    marginHorizontal: 13,
     borderWidth: 1,
     borderColor: '#ccc',
-    padding: 10,
+    width: 270,
+    height: 60,
     borderRadius: 15,
+    justifyContent: 'center',
+
+
+
+
   },
   statCount: {
     fontSize: 20,
     fontWeight: 'bold',
+
+
   },
   statLabel: {
-    fontSize: 16,
+    fontSize: 19,
     color: '#666',
+    width: 190,
+    marginLeft: 110,
+
+
+
   },
   itemContainer: {
     alignItems: 'center',
     marginHorizontal: 10,
     marginBottom: 10,
+
   },
   itemImage: {
     width: 50,
@@ -159,9 +173,11 @@ const styles = StyleSheet.create({
   itemName: {
     fontSize: 14,
     fontWeight: 'bold',
+
   },
   itemReviews: {
     fontSize: 12,
     color: '#666',
+
   },
 });
