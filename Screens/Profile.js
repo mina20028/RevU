@@ -12,9 +12,10 @@ export default function ProfilePage({ navigation }) {
   const [password, setPassword] = useState('password');
   const [showPassword, setShowPassword] = useState(false);
   const [bio, setBio] = useState(
-    'A software developer with a passion for learning new technologies and creating amazing user experiences.'
+    //'A software developer with a passion for learning new technologies and creating amazing user experiences.'
   );
   const [isEditing, setIsEditing] = useState(false);
+
 
   const toggleEditing = () => {
     if (isEditing) {
@@ -111,7 +112,7 @@ export default function ProfilePage({ navigation }) {
                 style={styles.input}
                 value={wallet}
                 placeholderTextColor="#999"
-                editable={[isEditing, !isEditing]}
+                editable={false}
 
               />
             </View>
