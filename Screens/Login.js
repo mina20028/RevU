@@ -15,6 +15,8 @@ export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+
+
     const handleLogin = async () => {
         const userData = {
             email,
@@ -40,7 +42,8 @@ export default function Login({ navigation }) {
             }
         } catch (error) {
             console.error('Error signing up:', error);
-            Alert.alert('Error', 'An error occurred. Please try again.');
+            Alert.alert('Error', 'The email or password is incorrect.');
+            //  Alert.alert('Error', 'An error occurred. Please try again.');
         }
     };
 

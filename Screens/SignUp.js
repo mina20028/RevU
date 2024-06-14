@@ -17,9 +17,94 @@ export default function SignUp({ navigation }) {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [age, setAge] = useState('');
 
+    const [emailError, setEmailError] = useState('');
+    const [fullNameError, setFullNameError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
+    const [ageError, setAgeError] = useState('');
+
+    const validateEmail = (email) => {
+        const regex = /^[^0-9\s@]+[0-9]?[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    };
+
+    const validatePassword = (password) => {
+        const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+        return re.test(password);
+    };
+
+    const validateFullname = (fullName) => {
+        const re = /^[a-zA-Z\s]+$/;
+        return re.test(fullName);
+    };
+
+    const validateAge = (age) => {
+        const re = /^[\d]+$/;
+        return re.test(age);
+    };
+
+    const validateInputs = () => {
+        let valid = true;
+
+        if (!email) {
+            setEmailError('Email is required');
+            valid = false;
+        } else if (!validateEmail(email)) {
+            setEmailError("Invalid email format Must be 'email@text.com'");
+            return;
+        } else {
+            setEmailError("");
+        }
+
+        if (!fullName) {
+            setFullNameError('Full Name is required');
+            valid = false;
+        } else if (!validateFullname(fullName)) {
+            setFullNameError("Invalid FullName format");
+            return;
+        } else {
+            setFullNameError('');
+        }
+
+        if (!password) {
+            setPasswordError('Password is required');
+            valid = false;
+        } else if (!validatePassword(password)) {
+            setPasswordError("Password must be at least 6 characters long and include uppercase, lowercase, digit, and special character");
+            return;
+        } else {
+            setPasswordError('');
+        }
+
+        if (!confirmPassword) {
+            setConfirmPasswordError('Confirm Password is required');
+            valid = false;
+        } else if (password !== confirmPassword) {
+            setConfirmPasswordError('Passwords do not match');
+            valid = false;
+        } else {
+            setConfirmPasswordError('');
+        }
+
+        if (!age) {
+            setAgeError('Age is required');
+            valid = false;
+        } else if (age < 18 || age > 60) {
+            setAgeError('You must be between 18 and 60 years old');
+            valid = false;
+
+        } else if (!validateAge(age)) {
+            setAgeError("Invalid Age format");
+            return;
+        } else {
+            setAgeError('');
+        }
+
+        return valid;
+    };
+
     const handleSignUp = async () => {
-        if (password !== confirmPassword) {
-            Alert.alert("Passwords do not match");
+        if (!validateInputs()) {
             return;
         }
 
@@ -28,13 +113,10 @@ export default function SignUp({ navigation }) {
             email: email,
             password: password,
             age: age,
-
         };
 
-
-
         try {
-            const response = await fetch('http://192.168.1.4:3000/auth/signUp', {//IPv4 Address"your laptop"
+            const response = await fetch('http://192.168.1.4:3000/auth/signUp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,6 +158,7 @@ export default function SignUp({ navigation }) {
                                 onChangeText={setEmail}
                                 bottom={20}
                             />
+                            {emailError ? <Text style={styles.errorEmail}>{emailError}</Text> : null}
                         </View>
                         <TextInput
                             placeholder="Full Name"
@@ -83,29 +166,41 @@ export default function SignUp({ navigation }) {
                             value={fullName}
                             onChangeText={setFullName}
                         />
-                        <TextInput
-                            placeholder="Password"
-                            style={styles.input}
-                            secureTextEntry
-                            value={password}
-                            onChangeText={setPassword}
-                            top={20}
-                        />
-                        <TextInput
-                            placeholder="Confirm Password"
-                            style={styles.input}
-                            secureTextEntry
-                            value={confirmPassword}
-                            onChangeText={setConfirmPassword}
-                            top={40}
-                        />
-                        <TextInput
-                            placeholder="Age"
-                            style={styles.input}
-                            value={age}
-                            onChangeText={setAge}
-                            top={60}
-                        />
+                        {fullNameError ? <Text style={styles.errorfullname}>{fullNameError}</Text> : null}
+                        <View>
+                            <TextInput
+                                placeholder="Password"
+                                style={styles.input}
+                                secureTextEntry
+                                value={password}
+                                onChangeText={setPassword}
+                                top={20}
+                            />
+
+                            {passwordError ? <Text style={styles.errorpassword}>{passwordError}</Text> : null}
+
+                        </View>
+                        <View>
+                            <TextInput
+                                placeholder="Confirm Password"
+                                style={styles.input}
+                                secureTextEntry
+                                value={confirmPassword}
+                                onChangeText={setConfirmPassword}
+                                top={40}
+                            />
+                            {confirmPasswordError ? <Text style={styles.errorcomfirmpassword}>{confirmPasswordError}</Text> : null}
+                        </View>
+                        <View>
+                            <TextInput
+                                placeholder="Age"
+                                style={styles.input}
+                                value={age}
+                                onChangeText={setAge}
+                                top={60}
+                            />
+                            {ageError ? <Text style={styles.errorAge}>{ageError}</Text> : null}
+                        </View>
                     </View>
                     <View style={{ alignItems: 'center' }}>
                         <TouchableOpacity onPress={handleSignUp} style={styles.button}>
@@ -164,6 +259,38 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         padding: 10,
     },
+    errorEmail: {
+        color: 'red',
+        top: -18,
+        left: 15,
+        marginBottom: -15
+    },
+    errorfullname: {
+        color: 'red',
+        top: 3,
+        right: 90,
+        marginBottom: -13
+    },
+    errorpassword: {
+        color: 'red',
+        top: 23,
+        left: 15,
+        marginBottom: -13,
+        paddingRight: 9
+    },
+    errorcomfirmpassword: {
+        color: 'red',
+        top: 42,
+        right: -15,
+        marginBottom: -15
+    },
+    errorAge: {
+        color: 'red',
+        top: 62,
+        right: -15,
+        marginBottom: -15
+    },
+
     button: {
         backgroundColor: '#39A7FF',
         width: 340,
