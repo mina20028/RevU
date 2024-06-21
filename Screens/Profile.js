@@ -30,21 +30,14 @@ export default function ProfilePage({ navigation }) {
 
   return (
     <ScrollView style={styles.view}>
-
+      <View style={styles.header}>
+        <Ionicons name="arrow-back" top={15} size={24} color="#fff" onPress={() => navigation.goBack()} />
+        <Text style={styles.headerText}>Profile</Text>
+      </View>
       <View style={styles.background}>
         <View style={styles.overlay}>
           <View style={styles.container}>
-            <View>
-              <TouchableOpacity onPress={button}>
-                <Ionicons
-                  name='arrow-back'
-                  size={30}
-                  right={150}
-                  top={30}
-                />
-              </TouchableOpacity>
 
-            </View>
             <Image
               style={styles.profileImage}
               source={require('../assets/RevU.png')} // Assuming the image is located in the assets folder
@@ -132,6 +125,7 @@ export default function ProfilePage({ navigation }) {
             <TouchableOpacity style={styles.editProfileButton} onPress={toggleEditing}>
               <Text style={styles.editProfileButtonText}>{isEditing ? 'Save Profile' : 'Edit Profile'}</Text>
             </TouchableOpacity>
+
           </View>
         </View>
       </View>
@@ -144,6 +138,20 @@ const styles = StyleSheet.create({
 
     paddingBottom: 60
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#7768B9',
+    paddingHorizontal: 10,
+    paddingVertical: 30,
+  },
+  headerText: {
+    color: '#fff',
+    fontSize: 20,
+    top: 15,
+    fontWeight: 'bold',
+    marginLeft: 10,
+  },
   background: {
     justifyContent: 'center',
     backgroundColor: 'white',
@@ -152,7 +160,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+
     justifyContent: 'center',
   },
   container: {
@@ -162,10 +170,10 @@ const styles = StyleSheet.create({
   profileImage: {
     width: 150,
     height: 150,
-    borderRadius: 75,
+    borderRadius: 30,
     marginBottom: 20,
     borderWidth: 2,
-    borderColor: '#ddd',
+
   },
   inputContainer: {
     width: '100%',
@@ -173,7 +181,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    color: '#333',
+    color: 'gray',
     marginBottom: 5,
     fontWeight: 'bold',
   },
@@ -181,10 +189,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#7768B9',
     borderRadius: 10,
     padding: 10,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
@@ -214,16 +222,17 @@ const styles = StyleSheet.create({
     color: '#007bff',
   },
   editProfileButton: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#7768B9',
     paddingVertical: 12,
     paddingHorizontal: 30,
-    borderRadius: 20,
+    borderRadius: 10,
     marginTop: 20,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    width: 300,
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 2,
+    alignItems: 'center'
   },
   editProfileButtonText: {
     color: '#fff',
