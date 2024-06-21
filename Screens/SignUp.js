@@ -6,9 +6,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import backgroung from '../assets/background.png';
-import logo from '../assets/RevU.png';
+import logo from '../assets/RevUSignUp.png';
 
-const { width, height } = Dimensions.get('window');
 
 export default function SignUp({ navigation }) {
     const [email, setEmail] = useState('');
@@ -116,7 +115,7 @@ export default function SignUp({ navigation }) {
         };
 
         try {
-            const response = await fetch('http://192.168.1.4:3000/auth/signUp', {
+            const response = await fetch('http://192.168.1.2:3000/auth/signUp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -139,167 +138,210 @@ export default function SignUp({ navigation }) {
     };
 
     return (
-        <ScrollView contentContainerStyle={{ paddingBottom: -40000 }} showsVerticalScrollIndicator={false}>
-            <View style={styles.container}>
-                <View>
-                    <Image source={backgroung} style={{ width: width, height: height }} />
-                    <View style={styles.logoContainer}>
+        <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false}>
+            <LinearGradient
+                colors={['#7768B9', '#4D34BB']}
+                start={{ x: 1.7, y: 0.35 }}
+                style={{ height: 1010 }}
+            >
+                <View style={styles.container}>
+
+                    <View style={styles.header}>
                         <Image source={logo} style={styles.logo} />
+                        <Text style={styles.subHeaderText}>Enter your details below</Text>
                     </View>
-                    <View >
-                        <Text style={styles.header}>Sign Up</Text>
-                    </View>
+
+
                     <View style={styles.inputContainer}>
-                        <View>
+                        <Text style={styles.label}>Email</Text>
+                        <View style={{
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
                             <TextInput
                                 placeholder="Email"
                                 style={styles.input}
                                 value={email}
                                 onChangeText={setEmail}
-                                bottom={20}
+
+
                             />
-                            {emailError ? <Text style={styles.errorEmail}>{emailError}</Text> : null}
                         </View>
-                        <TextInput
-                            placeholder="Full Name"
-                            style={styles.input}
-                            value={fullName}
-                            onChangeText={setFullName}
-                        />
+                        {emailError ? <Text style={styles.errorEmail}>{emailError}</Text> : null}
+
+
+                        <Text style={styles.label}>FullName</Text>
+                        <View style={{
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
+                            <TextInput
+                                placeholder="Full Name"
+                                style={styles.input}
+                                value={fullName}
+                                onChangeText={setFullName}
+
+                            />
+                        </View>
                         {fullNameError ? <Text style={styles.errorfullname}>{fullNameError}</Text> : null}
-                        <View>
+
+
+                        <Text style={styles.label}>Password</Text>
+                        <View style={{
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
                             <TextInput
                                 placeholder="Password"
                                 style={styles.input}
                                 secureTextEntry
                                 value={password}
                                 onChangeText={setPassword}
-                                top={20}
+
                             />
-
-                            {passwordError ? <Text style={styles.errorpassword}>{passwordError}</Text> : null}
-
                         </View>
-                        <View>
+                        {passwordError ? <Text style={styles.errorpassword}>{passwordError}</Text> : null}
+
+
+                        <Text style={styles.label}>confirmPassword</Text>
+                        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                             <TextInput
                                 placeholder="Confirm Password"
                                 style={styles.input}
                                 secureTextEntry
                                 value={confirmPassword}
                                 onChangeText={setConfirmPassword}
-                                top={40}
                             />
-                            {confirmPasswordError ? <Text style={styles.errorcomfirmpassword}>{confirmPasswordError}</Text> : null}
                         </View>
-                        <View>
+                        {confirmPasswordError ? <Text style={styles.errorcomfirmpassword}>{confirmPasswordError}</Text> : null}
+
+
+                        <Text style={styles.label}>Age</Text>
+                        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                             <TextInput
                                 placeholder="Age"
                                 style={styles.input}
                                 value={age}
                                 onChangeText={setAge}
-                                top={60}
+
                             />
-                            {ageError ? <Text style={styles.errorAge}>{ageError}</Text> : null}
                         </View>
+                        {ageError ? <Text style={styles.errorAge}>{ageError}</Text> : null}
+
                     </View>
                     <View style={{ alignItems: 'center' }}>
                         <TouchableOpacity onPress={handleSignUp} style={styles.button}>
                             <Text style={styles.buttonText}>Sign Up</Text>
                         </TouchableOpacity>
                         <View style={styles.login}>
-                            <Text style={styles.loginText}>Have an account already?</Text>
+                            <Text style={styles.loginText}>Already have an account ?</Text>
                             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                                 <Text style={styles.loginLink}>  Login</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
+
+
+
                 </View>
-            </View>
+            </LinearGradient>
         </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
+
+
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
+
+
+    },
+
+    header: {
         justifyContent: 'center',
-        marginBottom: -400
-    },
-    backgroundImage: {
-        width: width,
-        height: height,
-        position: 'absolute',
-    },
-    logoContainer: {
-        alignItems: 'center'
+        alignItems: 'center',
     },
     logo: {
         resizeMode: 'contain',
-        width: 170,
-        height: 170,
-        bottom: 690
+        width: 140,
+        height: 140,
+        top: 90
+
     },
-    header: {
-        color: 'white',
-        fontSize: 50,
-        bottom: 690,
-        fontWeight: 'bold',
-        left: 10,
+    subHeaderText: {
+        color: '#fff',
+        fontSize: 19,
+        top: 95
     },
+
     inputContainer: {
-        bottom: 550,
-        alignItems: 'center'
+        backgroundColor: 'white',
+        width: 360,
+        height: 800,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        marginTop: 151
+
+    },
+    label: {
+        fontSize: 16,
+        color: 'gray',
+        top: 42,
+        left: 23
+
     },
     input: {
-        borderColor: "gray",
-        width: 340,
+        borderColor: '#ccc',
+        width: 320,
+        marginBottom: 20,
         borderWidth: 1,
-        borderRadius: 20,
+        borderRadius: 10,
         padding: 10,
+        top: 50,
+        marginBottom: 35
     },
     errorEmail: {
         color: 'red',
-        top: -18,
-        left: 15,
+        top: 20,
+        left: 25,
         marginBottom: -15
     },
     errorfullname: {
         color: 'red',
-        top: 3,
-        right: 90,
+        top: 20,
+        left: 25,
         marginBottom: -13
     },
     errorpassword: {
         color: 'red',
-        top: 23,
-        left: 15,
+        top: 20,
+        left: 25,
         marginBottom: -13,
         paddingRight: 9
     },
     errorcomfirmpassword: {
         color: 'red',
-        top: 42,
-        right: -15,
+        top: 20,
+        left: 25,
         marginBottom: -15
     },
     errorAge: {
         color: 'red',
-        top: 62,
-        right: -15,
+        top: 20,
+        left: 25,
         marginBottom: -15
     },
 
     button: {
-        backgroundColor: '#39A7FF',
-        width: 340,
-        borderWidth: 2,
-        borderBlockColor: '#3572EF',
-        borderRadius: 15,
+        backgroundColor: '#7768B9',
+        width: 320,
         padding: 10,
-        bottom: 460,
-        alignItems: 'center'
+        bottom: 200,
+        alignItems: 'center',
+        borderRadius: 10,
+        padding: 10,
+
     },
     buttonText: {
         color: 'white',
@@ -309,7 +351,7 @@ const styles = StyleSheet.create({
     },
     login: {
         flexDirection: 'row',
-        bottom: 440
+        bottom: 190
     },
     loginText: {
         fontWeight: 'bold',
@@ -317,7 +359,7 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     loginLink: {
-        color: '#39A7FF',
+        color: '#7768B9',
         fontWeight: 'bold',
         justifyContent: 'center',
         fontSize: 15

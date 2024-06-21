@@ -7,6 +7,7 @@ import Login from './SignUp';
 import Onboarding from './Onboarding';
 import Home from './Home';
 import HomeProfile from './HomeProfile';
+import HomeRevU from './HomeRevU';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,7 +32,7 @@ export default function Tapbar({ navigation }) {
                         // shadowRadius: 3.5,
                     },
                 }} >
-            <Tab.Screen name="Home" component={Home}
+            <Tab.Screen name="HomeRevU" component={HomeRevU}
 
                 options={{
                     tabBarIcon: ({ focused }) => (
@@ -39,12 +40,12 @@ export default function Tapbar({ navigation }) {
                             <AntDesign
                                 name="home"
                                 size={25}
-                                color={focused ? 'gray' : 'blue'}
+                                color={focused ? '#9D9DC0' : '#473690'}
                             >
                             </AntDesign>
                             <Text style={{
                                 alignItems: 'center',
-                                color: focused ? 'gray' : 'blue',
+                                color: focused ? '#9D9DC0' : '#473690',
                             }}>Home</Text>
 
                         </View>
@@ -58,12 +59,12 @@ export default function Tapbar({ navigation }) {
                             <AntDesign
                                 name="search1"
                                 size={25}
-                                color={focused ? 'gray' : 'blue'}
+                                color={focused ? '#9D9DC0' : '#473690'}
                             >
                             </AntDesign>
                             <Text style={{
                                 alignItems: 'center',
-                                color: focused ? 'gray' : 'blue',
+                                color: focused ? '#9D9DC0' : '#473690',
                             }}>Search Rate</Text>
 
                         </View>
@@ -78,12 +79,12 @@ export default function Tapbar({ navigation }) {
                             <AntDesign
                                 name="profile"
                                 size={25}
-                                color={focused ? 'gray' : 'blue'}
+                                color={focused ? '#9D9DC0' : '#473690'}
                             >
                             </AntDesign>
                             <Text style={{
                                 alignItems: 'center',
-                                color: focused ? 'gray' : 'blue',
+                                color: focused ? '#9D9DC0' : '#473690',
                             }}>Profile</Text>
 
                         </View>

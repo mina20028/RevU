@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { AntDesign, FontAwesome5, Ionicons, MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
+import { AntDesign, FontAwesome5, MaterialIcons, Ionicons, MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
 export default function HomeProfile({ navigation }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const button = () => {
@@ -46,24 +46,23 @@ export default function HomeProfile({ navigation }) {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.header}>
+        <Ionicons name='settings' left={310} top={22} size={24} color="#fff" onPress={() => navigation.navigate('ProfilePage')} />
+        <Text style={styles.headerText}>Profile</Text>
+      </View>
 
       <View style={styles.profileHeader}>
-        <View>
-          <TouchableOpacity onPress={button}>
-            <Ionicons
-              name='settings'
-              size={25}
-              left={150}
-              top={30}
-            />
-          </TouchableOpacity>
-        </View>
+
         <Image
           source={{ uri: 'https://via.placeholder.com/150' }}
           style={styles.profileImage}
         />
         <Text style={styles.profileName}>Paula</Text>
         <Text style={styles.profileLocation}>Giza, Egypt</Text>
+        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.navigate('SignUp')} >
+          <MaterialIcons name='logout' size={30} top={13} color={'red'} />
+          <Text style={{ fontSize: 20, top: 14, color: 'red', marginBottom: 20, }}>  Logout</Text>
+        </TouchableOpacity>
       </View>
       <ScrollView horizontal style={styles.categories}>
         {categories.map((category, index) => (
@@ -82,7 +81,7 @@ export default function HomeProfile({ navigation }) {
   );
 };
 
-const CategoryButton = ({ onPress, count, label }) => (
+const CategoryButton = ({ onPress, label }) => (
   <TouchableOpacity onPress={onPress} style={styles.categoryItem}>
     <Text style={styles.statLabel}>{label}</Text>
   </TouchableOpacity>
@@ -100,21 +99,39 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     backgroundColor: '#fff',
-    paddingVertical: 20,
+    // paddingVertical: 20,
     paddingBottom: 60,
     alignItems: 'center',
 
   },
+
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#7768B9',
+    paddingHorizontal: 10,
+    paddingVertical: 30,
+    width: 360
+  },
+  headerText: {
+    color: '#fff',
+    fontSize: 20,
+    top: 15,
+    fontWeight: 'bold',
+    marginLeft: -20,
+  },
   profileHeader: {
+
     alignItems: 'center',
     marginBottom: 20,
 
   },
   profileImage: {
+    top: 30,
     width: 150,
     height: 150,
     borderRadius: 75,
-    marginBottom: 10,
+    marginBottom: 40,
 
   },
   profileName: {
@@ -128,12 +145,10 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   categories: {
-
-    marginBottom: 10,
+    marginBottom: 20,
   },
   categoryItem: {
-    borderWidth: 1,
-    borderColor: '#ccc',
+    backgroundColor: '#7768B9',
     width: 270,
     height: 60,
     borderRadius: 15,
@@ -151,9 +166,10 @@ const styles = StyleSheet.create({
   },
   statLabel: {
     fontSize: 19,
-    color: '#666',
+    color: 'white',
     width: 190,
     marginLeft: 110,
+    fontWeight: 'bold',
 
 
 

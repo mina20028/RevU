@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { AntDesign, FontAwesome5, Ionicons, MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import backgroung from '../assets/background.png';
-import logo from '../assets/RevU.png';
+import logo from '../assets/RevULogin.png';
 
 const { width, height } = Dimensions.get('window');
 
@@ -50,47 +50,71 @@ export default function Login({ navigation }) {
     return (
         <View style={styles.container}>
 
-            <Image source={backgroung} style={{ position: 'absolute', width: width, height: height, bottom: 80 }} />
-            <View >
-                <Image source={logo} style={styles.logo} />
-            </View>
+            <LinearGradient
+                colors={['#7768B9', '#4D34BB']}
+                start={{ x: 1.7, y: 0.35 }}
+            >
 
-            <View >
-                <Text style={styles.header}>Login</Text>
-            </View>
+                <View style={styles.header} >
+                    <Image source={logo} style={styles.logo} />
 
-            <View style={styles.inputContainer}>
-                <View>
-                    <TextInput
-                        placeholder="Email"
-                        style={styles.input}
-                        value={email}
-                        onChangeText={setEmail}
-                        bottom={20}
-                    />
+                    <Text style={styles.subtitle}>Welcome back!</Text>
                 </View>
 
-                <TextInput
-                    placeholder="Password"
-                    style={styles.input}
-                    secureTextEntry
-                    value={password}
-                    onChangeText={setPassword}
+                <View style={styles.inputContainer}>
 
-                />
-            </View>
+                    <Text style={styles.label}>Email</Text>
+                    <View style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }} >
+                        <TextInput
+                            placeholder="Email"
+                            style={styles.input}
+                            value={email}
+                            onChangeText={setEmail}
+                            bottom={20}
+                        />
+                    </View>
+                    <Text style={styles.label}>Password</Text>
+                    <View style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}>
+                        <TextInput
+                            placeholder="Password"
+                            style={styles.input}
+                            secureTextEntry
+                            value={password}
+                            onChangeText={setPassword}
+                        />
+                    </View>
+
+                    <Text style={styles.forgotPassword}>
+                        Forget password?
+                        <TouchableOpacity onPress={() => navigation.navigate('ResetPassword')}>
+                            <Text style={styles.resetText}>Reset</Text>
+                        </TouchableOpacity>
+                    </Text>
 
 
-            <TouchableOpacity onPress={handleLogin} style={styles.button}>
-                <Text style={styles.buttonText}>Login</Text>
-            </TouchableOpacity>
-            <View style={styles.sign}>
-                <Text style={styles.signText}>Have an account already?</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-                    <Text style={styles.signLink}>  SignUp</Text>
-                </TouchableOpacity>
 
-            </View>
+                    <View style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}>
+                        <TouchableOpacity onPress={handleLogin} style={styles.button}>
+                            <Text style={styles.buttonText}>Login</Text>
+                        </TouchableOpacity>
+                        <View style={styles.sign}>
+                            <Text style={styles.signText}>Don't have an account?</Text>
+                            <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+                                <Text style={styles.signLink}>  Create Account</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </LinearGradient>
         </View>
     );
 }
@@ -98,47 +122,69 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    backgroundImage: {
-        width: width,
-        height: height,
-        position: 'absolute',
-    },
-    logoContainer: {
-        alignItems: 'center'
-    },
-    logo: {
-        resizeMode: 'contain',
-        width: 170,
-        height: 170,
-        bottom: 130
+        backgroundColor: '#7768B9',
+
     },
     header: {
-        color: 'white',
-        fontSize: 50,
-        bottom: 150,
-        fontWeight: 'bold',
-        right: 100
+        justifyContent: 'center',
+        alignItems: 'center',
     },
+
+    logo: {
+        resizeMode: 'contain',
+        width: 140,
+        height: 140,
+        top: 90
+
+    },
+    subtitle: {
+        fontSize: 19,
+        color: '#fff',
+        top: 95
+    },
+
     inputContainer: {
-        bottom: 30
+        backgroundColor: 'white',
+        width: 360,
+        height: 420,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        marginTop: 151
+
+    },
+    label: {
+        fontSize: 16,
+        color: 'gray',
+        top: 42,
+        left: 23
+
     },
     input: {
-        borderColor: "gray",
-        width: 340,
+        borderColor: '#ccc',
+        width: 320,
+        marginBottom: 20,
         borderWidth: 1,
-        borderRadius: 20,
+        borderRadius: 10,
         padding: 10,
+        top: 50,
+        marginBottom: 30
+    },
+    forgotPassword: {
+        left: 22,
+        top: 30,
+        marginBottom: 50,
+        color: 'grey',
+    },
+    resetText: {
+        color: 'red',
+        top: 3,
+        left: 5
+
     },
     button: {
-        backgroundColor: '#39A7FF',
-        width: 340,
-        borderWidth: 2,
-        borderRadius: 15,
-        borderBlockColor: '#3572EF',
+        backgroundColor: '#7768B9',
+        width: 320,
+        borderRadius: 10,
         padding: 10,
         top: 10,
         alignItems: 'center'
@@ -147,7 +193,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
         justifyContent: 'center',
-        fontSize: 15
+        fontSize: 16
     },
     sign: {
         flexDirection: 'row',
@@ -159,7 +205,7 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     signLink: {
-        color: '#39A7FF',
+        color: '#7768B9',
         fontWeight: 'bold',
         justifyContent: 'center',
         fontSize: 15

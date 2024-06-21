@@ -79,7 +79,7 @@ export default class Onboarding extends React.Component {
 
                 <Text style={{
                     textAlign: 'center',
-                    color: '#4269B1',
+                    color: '#4D34BB',
                     fontSize: 30,
                     marginLeft: 19,
                     marginRight: 19,
@@ -94,7 +94,7 @@ export default class Onboarding extends React.Component {
                 </Text>
                 <Text style={{
                     textAlign: 'center',
-                    color: '#4269B1',
+                    color: '#4D34BB',
                     fontSize: 30,
                     marginLeft: 19,
                     marginRight: 19,
@@ -109,7 +109,7 @@ export default class Onboarding extends React.Component {
                 </Text>
                 <Text style={{
                     textAlign: 'center',
-                    color: '#4269B1',
+                    color: '#4D34BB',
                     fontSize: 30,
                     marginLeft: 19,
                     marginRight: 19,
@@ -128,14 +128,14 @@ export default class Onboarding extends React.Component {
     _renderNextButton = () => {
         return (
             <View >
-                <Text style={{ top: 14, fontWeight: 'bold' }}>Next</Text>
+                <Text style={{ top: 14, fontWeight: 'bold', color: '#7768B9' }}>Next</Text>
             </View>
         )
     }
     _renderDoneButton = () => {
         return (
             <View >
-                <Text onPress={() => this.props.navigation.navigate('Tabbar')} style={{ top: 14, fontWeight: 'bold' }} >Done</Text>
+                <Text onPress={() => this.props.navigation.navigate('Tabbar')} style={{ top: 14, fontWeight: 'bold', color: '#7768B9' }} >Done</Text>
             </View>
         )
     }
@@ -143,7 +143,7 @@ export default class Onboarding extends React.Component {
     _renderSkipButton = () => {
         return (
             <View>
-                <Text onPress={() => this.props.navigation.navigate('Tabbar')} style={{ top: 14, fontWeight: 'bold' }} >Skip</Text>
+                <Text onPress={() => this.props.navigation.navigate('Tabbar')} style={{ top: 14, fontWeight: 'bold', color: '#7768B9' }} >Skip</Text>
             </View>
         )
     }
