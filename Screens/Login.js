@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { AntDesign, FontAwesome5, Ionicons, MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
@@ -24,7 +25,7 @@ export default function Login({ navigation }) {
         };
 
         try {
-            const response = await fetch('http://192.168.1.4:3000/auth/login', {//IPv4 Address"your laptop"
+            const response = await fetch('http://192.168.1.5:3000/auth/login', {//IPv4 Address"your laptop"
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,8 +36,15 @@ export default function Login({ navigation }) {
             const data = await response.json();
 
             if (response.ok) {
+                console.log(data.data)
+                await AsyncStorage.setItem(
+                    'userdata',
+                    JSON.stringify(data.data),
+                );
                 Alert.alert('Success', 'Sign up successful');
                 navigation.navigate('Tapbar')
+
+
             } else {
                 Alert.alert('Error', result.message || 'Sign up failed');
             }

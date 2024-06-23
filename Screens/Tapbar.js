@@ -52,7 +52,7 @@ export default function Tapbar({ navigation }) {
                     ),
                     headerShown: false
                 }} />
-            <Tab.Screen name="Login" component={SemanticAnalysis}
+            {/* <Tab.Screen name="Login" component={SemanticAnalysis}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center' }}>
@@ -71,7 +71,7 @@ export default function Tapbar({ navigation }) {
                     ),
                     headerShown: false
                 }}
-            />
+            /> */}
             <Tab.Screen name="HomeProfile" component={HomeProfile}
                 options={{
                     tabBarIcon: ({ focused }) => (

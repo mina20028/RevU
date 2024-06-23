@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { AntDesign, FontAwesome5, MaterialIcons, Ionicons, MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
+import { useIsFocused } from '@react-navigation/native';
 export default function HomeProfile({ navigation }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [username, setUsername] = useState('');
+  const isFocused = useIsFocused();
   const button = () => {
     navigation.navigate('ProfilePage');
   }
@@ -31,33 +35,67 @@ export default function HomeProfile({ navigation }) {
     //     { name: 'Recommendation Item 8', reviews: 20 }
     //   ]
     // },
-    // {
-    //   name: 'Likes',
-    //   count: 2,
-    //   items: [
-    //     { name: 'Likes Item 1', reviews: 10 },
-    //     { name: 'Likes Item 2', reviews: 8 }
-    //   ]   }
+    {
+      name: 'Likes',
+      count: 2,
+      items: [
+        { name: 'Likes Item 1', reviews: 10 },
+        { name: 'Likes Item 2', reviews: 8 }
+      ]
+    }
   ];
 
   const handleCategoryPress = (category) => {
     setSelectedCategory(selectedCategory === category ? null : category);
   };
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const userData = await AsyncStorage.getItem('userdata');
+        const parsedUserData = JSON.parse(userData);
+        const { _id: userId, token } = parsedUserData;
+
+        const response = await fetch(`http://192.168.1.5:3000/user/get-profile/${userId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'accesstoken': token,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch profile data');
+        }
+
+        const { data } = await response.json();
+        console.log(data); // Check if data is correctly logged
+
+        setUsername(data.username);
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+        Alert.alert('Error', 'An error occurred while fetching profile data');
+      }
+    };
+
+    fetchProfile();
+  }, [isFocused]);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
-        <Ionicons name='settings' left={310} top={22} size={24} color="#fff" onPress={() => navigation.navigate('ProfilePage')} />
-        <Text style={styles.headerText}>Profile</Text>
-      </View>
+        <TouchableOpacity style={styles.h}>
+          <Ionicons name='settings' left={300} top={15} size={24} color="#fff" onPress={() => navigation.navigate('ProfilePage')} />
+          <Text style={styles.headerText}>Profile</Text>
+        </TouchableOpacity>
 
+      </View>
       <View style={styles.profileHeader}>
 
         <Image
-          source={{ uri: 'https://via.placeholder.com/150' }}
+          source={{ uri: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' }}
           style={styles.profileImage}
         />
-        <Text style={styles.profileName}>Paula</Text>
+        <Text style={styles.profileName}>{username}</Text>
         <Text style={styles.profileLocation}>Giza, Egypt</Text>
         <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.navigate('SignUp')} >
           <MaterialIcons name='logout' size={30} top={13} color={'red'} />
@@ -113,6 +151,12 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
     width: 360
   },
+  h: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+
+  },
   headerText: {
     color: '#fff',
     fontSize: 20,
@@ -130,7 +174,7 @@ const styles = StyleSheet.create({
     top: 30,
     width: 150,
     height: 150,
-    borderRadius: 75,
+    borderRadius: 20,
     marginBottom: 40,
 
   },
@@ -149,13 +193,13 @@ const styles = StyleSheet.create({
   },
   categoryItem: {
     backgroundColor: '#7768B9',
-    width: 270,
-    height: 60,
+    width: 140,
+    height: 50,
+    margin: 10,
     borderRadius: 15,
     justifyContent: 'center',
-
-
-
+    alignItems: 'center',
+    alignContent: 'center',
 
   },
   statCount: {
@@ -168,7 +212,7 @@ const styles = StyleSheet.create({
     fontSize: 19,
     color: 'white',
     width: 190,
-    marginLeft: 110,
+    textAlign: 'center',
     fontWeight: 'bold',
 
 

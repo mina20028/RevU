@@ -1,31 +1,122 @@
-import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, ImageBackground, Alert, ScrollView } from 'react-native';
-import { AntDesign, FontAwesome5, Ionicons, MaterialCommunityIcons, Fontisto } from '@expo/vector-icons';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert, ScrollView, } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import AwesomeAlert from 'react-native-awesome-alerts';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as ImagePicker from 'expo-image-picker';
 export default function ProfilePage({ navigation }) {
-  const button = () => {
-    navigation.goBack();
-  }
-  const [name, setName] = useState('John Doe');
-  const [username, setUsername] = useState('@johndoe');
-  const [email, setEmail] = useState('johndoe@example.com');
-  const [wallet, setWallet] = useState('$1000');
-  const [password, setPassword] = useState('password');
-  const [showPassword, setShowPassword] = useState(false);
-  const [bio, setBio] = useState(
-    //'A software developer with a passion for learning new technologies and creating amazing user experiences.'
-  );
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  const [age, setAge] = useState('');
+  const [bio, setBio] = useState('');
   const [isEditing, setIsEditing] = useState(false);
+  const [image, setImage] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
 
+  const press = () => {
+    setShowAlert(!showAlert);
+  }
 
-  const toggleEditing = () => {
-    if (isEditing) {
-      Alert.alert('Profile Saved', 'Your profile has been successfully saved.');
+  const handelgallery = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 4],
+      quality: 1,
+
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
     }
-    setIsEditing(!isEditing);
+    setShowAlert(false)
+
+  };
+  // camera
+  const handelcamera = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 4],
+      quality: 1,
+    });
+    setModelVisible(false)
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+
   };
 
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const userData = await AsyncStorage.getItem('userdata');
+        const parsedUserData = JSON.parse(userData);
+        const { _id: userId, token } = parsedUserData;
+
+        const response = await fetch(`http://192.168.1.5:3000/user/get-profile/${userId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'accesstoken': token,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch profile data');
+        }
+
+        const { data } = await response.json();
+        setUsername(data.username);
+        setEmail(data.email);
+        // setPassword(data.password); // Consider whether you want to include password in this flow
+        setAge(data.age);
+
+
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+        Alert.alert('Error', 'An error occurred while fetching profile data');
+      }
+    };
+
+    fetchProfile();
+  }, []);
+
+  const toggleEditing = async () => {
+    if (isEditing) {
+      try {
+        const userData = await AsyncStorage.getItem('userdata');
+        const parsedUserData = JSON.parse(userData);
+        const { _id: userId, token } = parsedUserData;
+
+        const response = await fetch(`http://192.168.1.5:3000/user/update-profile`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'accesstoken': token,
+          },
+          body: JSON.stringify({ username, email, age }),
+        });
+
+        if (response.ok) {
+          Alert.alert('Profile Updated', 'Your profile has been successfully updated.');
+        } else {
+          throw new Error('Failed to update profile');
+        }
+      } catch (error) {
+        console.error('Error updating profile:', error);
+        Alert.alert('Error', 'An error occurred while updating profile data');
+      }
+    }
+
+    setIsEditing(!isEditing);
   };
 
   return (
@@ -40,18 +131,37 @@ export default function ProfilePage({ navigation }) {
 
             <Image
               style={styles.profileImage}
-              source={require('../assets/RevU.png')} // Assuming the image is located in the assets folder
+              source={{ uri: image ? image : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' }}
             />
-            <View style={styles.inputContainer}>
-              <Text style={styles.label}>Name:</Text>
-              <TextInput
-                style={[styles.input, !isEditing && styles.inputDisabled]}
-                value={name}
-                onChangeText={setName}
-                placeholder="Name"
-                placeholderTextColor="#999"
-                editable={isEditing}
+            <View style={{ width: 40, height: 40, backgroundColor: '#7768B9', borderRadius: 50, alignItems: 'center', justifyContent: 'center', bottom: 25, marginTop: -20 }}>
+              <TouchableOpacity onPress={press}>
+                <Ionicons name='camera' size={30} />
+              </TouchableOpacity>
+
+              <AwesomeAlert
+
+                show={showAlert}
+                title='Select Photo'
+                titleStyle={{ fontSize: 22, color: '#7768B9', fontWeight: 'bold', marginBottom: 15 }}
+                customView={
+                  <View>
+                    <TouchableOpacity onPress={handelgallery} style={{ width: 120, height: 40, backgroundColor: '#7768B9', alignItems: 'center', justifyContent: 'center', borderRadius: 4 }}>
+                      <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white' }}>from Gallery</Text>
+                    </TouchableOpacity >
+                    <TouchableOpacity onPress={handelcamera} style={{ width: 120, height: 40, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', borderRadius: 4, marginTop: 20, borderWidth: 2, borderColor: '#7768B9' }}>
+                      <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#7768B9' }}>Take photo</Text></TouchableOpacity>
+                  </View>
+                }
+
+                showConfirmButton={true}
+                confirmText='Cancle'
+                confirmButtonStyle={{ backgroundColor: '#CF0A2C', width: 80, alignItems: 'center' }}
+                confirmButtonTextStyle={{ fontSize: 15, fontWeight: 'bold' }}
+                onConfirmPressed={() => {
+                  setShowAlert(false)
+                }}
               />
+
             </View>
             <View style={styles.inputContainer}>
               <Text style={styles.label}>Username:</Text>
@@ -64,6 +174,7 @@ export default function ProfilePage({ navigation }) {
                 editable={isEditing}
               />
             </View>
+
             <View style={styles.inputContainer}>
               <Text style={styles.label}>Email:</Text>
               <TextInput
@@ -77,39 +188,17 @@ export default function ProfilePage({ navigation }) {
               />
             </View>
             <View style={styles.inputContainer}>
-              <Text style={styles.label}>Password:</Text>
-              <View style={styles.passwordInputContainer}>
-                <TextInput
-                  style={[styles.input, !isEditing && styles.inputDisabled, styles.passwordInput]}
-                  value={password}
-                  onChangeText={setPassword}
-                  placeholder="Password"
-                  placeholderTextColor="#999"
-                  secureTextEntry={!showPassword}
-                  editable={isEditing}
-                />
-                {isEditing && (
-                  <TouchableOpacity
-                    style={styles.showPasswordButton}
-                    onPress={toggleShowPassword}
-                  >
-                    <Text style={styles.showPasswordButtonText}>{showPassword ? 'Hide' : 'Show'}</Text>
-                  </TouchableOpacity>
-                )}
-              </View>
-            </View>
-
-            <View style={styles.inputContainer}>
-              <Text style={styles.label}>Wallet:</Text>
+              <Text style={styles.label}>Age:</Text>
               <TextInput
-                style={styles.input}
-                value={wallet}
+                style={[styles.input, !isEditing && styles.inputDisabled]}
+                value={String(age)}
+                onChangeText={setAge}
+                placeholder="Age"
                 placeholderTextColor="#999"
-                editable={false}
-
+                editable={isEditing}
               />
             </View>
-
+            {/* Password input can be included if needed, but it's usually not recommended to expose or update passwords directly */}
             <View style={styles.inputContainer}>
               <Text style={styles.label}>Bio:</Text>
               <TextInput
@@ -125,13 +214,12 @@ export default function ProfilePage({ navigation }) {
             <TouchableOpacity style={styles.editProfileButton} onPress={toggleEditing}>
               <Text style={styles.editProfileButtonText}>{isEditing ? 'Save Profile' : 'Edit Profile'}</Text>
             </TouchableOpacity>
-
           </View>
         </View>
       </View>
     </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   view: {
@@ -170,6 +258,7 @@ const styles = StyleSheet.create({
   profileImage: {
     width: 150,
     height: 150,
+    resizeMode: 'contain',
     borderRadius: 30,
     marginBottom: 20,
     borderWidth: 2,

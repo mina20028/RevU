@@ -19,7 +19,7 @@ export default function ClassifyReview({ navigation }) {
                     <Text style={styles.hText}>Class</Text>
                 </View>
                 <TouchableOpacity onPress={handlebutton} style={styles.Button}>
-                    <Text style={styles.ButtonText}>Classify Review</Text>
+                    <Text style={styles.ButtonText}>Another search</Text>
                 </TouchableOpacity>
 
             </View>

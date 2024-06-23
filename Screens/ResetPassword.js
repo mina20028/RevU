@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import logo from '../assets/RevU2.png'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
+import logo from '../assets/RevU2.png';
+
 const ResetPassword = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [isButtonActive, setIsButtonActive] = useState(false);
@@ -10,17 +11,33 @@ const ResetPassword = ({ navigation }) => {
         setIsButtonActive(input.length > 0);
     };
 
-    const handleConfirm = () => {
-        // Handle the confirm action
-        alert('Password reset link has been sent to your email');
+    const handleConfirm = async () => {
+        try {
+            const response = await fetch('http://192.168.1.5:3000/user/reset-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                Alert.alert('Success', 'Password reset link has been sent to your email');
+            } else {
+                throw new Error(result.message || 'An error occurred');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            Alert.alert('Error', error.message || 'An error occurred');
+        }
     };
 
     return (
         <View style={styles.container}>
             <Image source={logo} style={styles.logo} />
             <Text style={styles.title}>Reset Password</Text>
-
-            <Text style={styles.subtitle}>Take a moment to reset password</Text>
+            <Text style={styles.subtitle}>Take a moment to reset your password</Text>
             <Text style={styles.texttitle}>Email</Text>
             <TextInput
                 style={styles.input}
@@ -30,22 +47,18 @@ const ResetPassword = ({ navigation }) => {
                 keyboardType="email-address"
                 autoCapitalize="none"
             />
-
             <Text style={styles.rememberPassword}>Remember password?</Text>
-
             <TouchableOpacity
                 style={[styles.button, isButtonActive ? styles.activeButton : styles.inactiveButton]}
                 onPress={handleConfirm}
-                disabled={!isButtonActive}>
-
+                disabled={!isButtonActive}
+            >
                 <Text style={styles.buttonText}>Confirm</Text>
             </TouchableOpacity>
-
-            {/* <Text style={styles.footerText}>Don't have an account? <Text style={styles.createAccountText}>Create account</Text></Text> */}
             <View style={styles.sign}>
                 <Text style={styles.footerText}>Don't have an account?</Text>
                 <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-                    <Text style={styles.createAccountText}>  Create Account</Text>
+                    <Text style={styles.createAccountText}> Create Account</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -65,7 +78,6 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         bottom: 60,
-
     },
     title: {
         fontSize: 38,
@@ -86,14 +98,12 @@ const styles = StyleSheet.create({
         color: '#555',
     },
     input: {
-        height: 40,
         borderColor: '#ccc',
         borderWidth: 1,
-        marginBottom: 20,
         paddingHorizontal: 10,
         borderRadius: 5,
         width: 325,
-        height: 50
+        height: 50,
     },
     rememberPassword: {
         textAlign: 'left',
@@ -119,7 +129,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     footerText: {
-
         color: '#555',
     },
     createAccountText: {
@@ -127,7 +136,7 @@ const styles = StyleSheet.create({
     },
     sign: {
         flexDirection: 'row',
-        top: 30
+        top: 30,
     },
 });
 

@@ -107,20 +107,26 @@ export default function SignUp({ navigation }) {
             return;
         }
 
-        const userData = {
-            username: fullName,
-            email: email,
-            password: password,
-            age: age,
-        };
+        // const userData = {
+        //     username: fullName,
+        //     email: email,
+        //     password: password,
+        //     age: age,
+        // };
 
         try {
-            const response = await fetch('http://192.168.1.2:3000/auth/signUp', {
+            const response = await fetch('http://192.168.1.5:3000/auth/signUp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(userData),
+                // body: JSON.stringify(userData),
+                body: JSON.stringify({
+                    username: fullName, // Ensure the API accepts and saves the username
+                    email,
+                    password,
+                    age
+                }),
             });
 
             const result = await response.json();

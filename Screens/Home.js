@@ -8,10 +8,11 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import m from '../assets/product/airpods.jpg';
 const bestSellerItems = [
     {
-        id: 'Best Seller #1',
-        name: '#1',
+        id: '1',
+        name: 'Best Seller #1',
         price: '$54.95',
         image: require('../assets/product/airpods.jpg'),
+        // url: 'https://www.amazon.com/INIU-High-Speed-Flashlight-Powerbank-Compatible/dp/B07CZDXDG8/ref=zg_bs_c_wireless_d_sccl_5/143-1339287-7399349?pd_rd_w=JBDXu&content-id=amzn1.sym.7379aab7-0dd8-4729-b0b5-2074f1cb413d&pf_rd_p=7379aab7-0dd8-4729-b0b5-2074f1cb413d&pf_rd_r=BCV29TW0C7JGKE5H9W4D&pd_rd_wg=IdjtN&pd_rd_r=6463f8f4-831b-4a9d-835d-6f2f6eb03ded&pd_rd_i=B07CZDXDG8&th=1',
         Text: 'Apple AirPods (2nd Generation) Wireless Ear Buds, Bluetooth Headphones with Lightning Charging Case Included, Over 24 Hours of Battery Life, Effortless Setup for iPhone',
     },
     {
@@ -256,12 +257,15 @@ export default function Home({ navigation }) {
         setSelectedItem(item);
         setIsVisible(true);
     };
+    // const openURL = (url) => {
+    //     Linking.openURL(url).catch(err => console.error("Couldn't load page", err));
+    // };
 
     const updateSearch = (search) => {
         setSearch(search);
-        setFilteredBestSeller(initialBestSellerItems.filter(item => item.name.toLowerCase().includes(search.toLowerCase())));
-        setFilteredMostReviewed(initialMostReviewedItems.filter(item => item.name.toLowerCase().includes(search.toLowerCase())));
-        setFilteredRecommended(initialRecommendedItems.filter(item => item.name.toLowerCase().includes(search.toLowerCase())));
+        setFilteredBestSeller(initialBestSellerItems.filter(item => item.Text.toLowerCase().includes(search.toLowerCase())));
+        setFilteredMostReviewed(initialMostReviewedItems.filter(item => item.Text.toLowerCase().includes(search.toLowerCase())));
+        setFilteredRecommended(initialRecommendedItems.filter(item => item.Text.toLowerCase().includes(search.toLowerCase())));
     };
 
     const renderProduct = ({ item }) => (
@@ -280,6 +284,7 @@ export default function Home({ navigation }) {
                 buttonStyle={styles.buyButton}
                 titleStyle={styles.buyButtonTitle}
                 onPress={() => press(item)}
+            // onPress={() => openURL(item.url)}
             />
         </Card>
     );

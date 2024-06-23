@@ -135,7 +135,7 @@ export default class Onboarding extends React.Component {
     _renderDoneButton = () => {
         return (
             <View >
-                <Text onPress={() => this.props.navigation.navigate('Tabbar')} style={{ top: 14, fontWeight: 'bold', color: '#7768B9' }} >Done</Text>
+                <Text onPress={() => this.props.navigation.navigate('Login')} style={{ top: 14, fontWeight: 'bold', color: '#7768B9' }} >Done</Text>
             </View>
         )
     }
@@ -143,7 +143,7 @@ export default class Onboarding extends React.Component {
     _renderSkipButton = () => {
         return (
             <View>
-                <Text onPress={() => this.props.navigation.navigate('Tabbar')} style={{ top: 14, fontWeight: 'bold', color: '#7768B9' }} >Skip</Text>
+                <Text onPress={() => this.props.navigation.navigate('Login')} style={{ top: 14, fontWeight: 'bold', color: '#7768B9' }} >Skip</Text>
             </View>
         )
     }

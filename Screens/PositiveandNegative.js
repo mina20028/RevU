@@ -52,7 +52,7 @@ export default function PositiveandNegative({ navigation }) {
                 </View>
 
                 <TouchableOpacity onPress={press} style={styles.Button}>
-                    <Text style={styles.ButtonText}>Search</Text>
+                    <Text style={styles.ButtonText}>Classify Review</Text>
                 </TouchableOpacity>
                 <Text style={{ top: 80, left: 20 }}>{displayText}</Text>
             </View>

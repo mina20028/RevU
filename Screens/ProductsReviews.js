@@ -36,7 +36,7 @@ export default function ProductsReviews({ navigation }) {
                     />
                 </View>
                 <TouchableOpacity onPress={handleclassify} style={styles.Button}>
-                    <Text style={styles.ButtonText}>Classify Review</Text>
+                    <Text style={styles.ButtonText}>Search</Text>
                 </TouchableOpacity>
 
             </View>
